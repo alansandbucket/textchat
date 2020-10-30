@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -18,15 +20,16 @@ class Server
 {
     public:
         Server();
-        void createSocket();
+        void createSocket(std::string portNumStr);
         void handleConnections();
 
     private:
-        pthread_t chatters[NUM_CHAT];
+        int pthsCount;
+        std::vector<pthread_t*> pths;
         int numConnections;
         int portNum;
         int listenSocketfd;
         struct sockaddr_in servAddr;
 
         int addUser();
-}
+};
